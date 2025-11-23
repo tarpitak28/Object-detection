@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+  <style>
+    .box { fill:#f4f6f9; stroke:#2b2f33; stroke-width:2px; rx:8; }
+    .comp { font: 16px 'Segoe UI', Arial, sans-serif; fill:#111; }
+    .title { font: 18px 'Segoe UI', Arial, sans-serif; font-weight:700; }
+    .sub { font: 14px 'Segoe UI', Arial, sans-serif; fill:#333; }
+    .arrow { stroke:#2b2f33; stroke-width:2; marker-end:url(#arrowhead); }
+    .note { font:12px 'Segoe UI', Arial, sans-serif; fill:#444; }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2b2f33" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="40" y="36" class="title">object-counter — Architecture Diagram</text>
+
+  <!-- Assets -->
+  <rect x="40" y="60" width="260" height="120" class="box"/>
+  <text x="60" y="92" class="comp">Assets</text>
+  <text x="60" y="118" class="sub">- sample_images/</text>
+  <text x="60" y="138" class="sub">- inputs (photos, datasets)</text>
+
+  <!-- Scripts -->
+  <rect x="340" y="60" width="260" height="120" class="box"/>
+  <text x="360" y="92" class="comp">Scripts</text>
+  <text x="360" y="118" class="sub">- generate_sample.py</text>
+  <text x="360" y="138" class="sub">- generate_and_detect.py</text>
+
+  <!-- Outputs -->
+  <rect x="640" y="60" width="260" height="120" class="box"/>
+  <text x="660" y="92" class="comp">Outputs</text>
+  <text x="660" y="118" class="sub">- outputs/*.jpg</text>
+  <text x="660" y="138" class="sub">- visualizations & reports</text>
+
+  <!-- Core src box -->
+  <rect x="220" y="220" width="760" height="360" class="box"/>
+  <text x="240" y="248" class="comp">Core (package `src`)</text>
+
+  <!-- components inside src -->
+  <rect x="260" y="280" width="220" height="80" fill="#ffffff" stroke="#2b2f33" stroke-width="1" rx="6"/>
+  <text x="280" y="312" class="sub">preprocessing.py</text>
+  <text x="280" y="332" class="note">- grayscale, blur, edges/threshold</text>
+
+  <rect x="520" y="280" width="220" height="80" fill="#ffffff" stroke="#2b2f33" stroke-width="1" rx="6"/>
+  <text x="540" y="312" class="sub">contour_counter.py</text>
+  <text x="540" y="332" class="note">- findContours, filter by area</text>
+
+  <rect x="780" y="280" width="160" height="80" fill="#ffffff" stroke="#2b2f33" stroke-width="1" rx="6"/>
+  <text x="800" y="312" class="sub">utils.py</text>
+  <text x="800" y="332" class="note">- IO & helpers</text>
+
+  <rect x="520" y="380" width="420" height="90" fill="#ffffff" stroke="#2b2f33" stroke-width="1" rx="6"/>
+  <text x="540" y="404" class="sub">main.py (CLI)</text>
+  <text x="540" y="426" class="note">- CLI flags: --no-gui, --output</text>
+  <text x="540" y="444" class="note">- runs preprocess -> count -> visualize</text>
+
+  <!-- Test box -->
+  <rect x="40" y="620" width="200" height="80" class="box"/>
+  <text x="60" y="656" class="comp">Testing</text>
+  <text x="60" y="678" class="sub">- test/test_counter.py (pytest)</text>
+
+  <!-- Dataflow arrows -->
+  <path d="M300 180 L300 220" class="arrow" />
+  <path d="M420 180 L420 220" class="arrow" />
+  <path d="M760 180 L760 220" class="arrow" />
+
+  <path d="M150 180 L280 260" class="arrow" />
+  <path d="M460 260 L520 260" class="arrow" />
+  <path d="M760 260 L900 260" class="arrow" />
+
+  <!-- arrows from src to outputs and tests -->
+  <path d="M880 380 L920 320" class="arrow" />
+  <path d="M480 440 L240 700" class="arrow" />
+
+  <!-- Legend / notes -->
+  <rect x="40" y="520" width="420" height="80" fill="#fff8e6" stroke="#d99a00" stroke-width="1" rx="6"/>
+  <text x="60" y="548" class="comp">Notes</text>
+  <text x="60" y="572" class="note">- Typical flow: sample image -> preprocessing -> contour detection -> visualization</text>
+  <text x="60" y="592" class="note">- Tuning knobs: preprocessing params, `min_area`, optional segmentation for overlaps</text>
+
+  <!-- Footer -->
+  <text x="40" y="740" class="note">Generated diagram: `docs/architecture.svg` — open in browser or any SVG viewer.</text>
+</svg>
